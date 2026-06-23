@@ -1,0 +1,697 @@
+/* ============================================================
+   終活・相続サポートセンター — style.css
+   ブランドカスタマイズ変数は :root の --brand-* を変更するだけ
+   ============================================================ */
+
+/* ---------- 1. カスタマイズ変数（ロゴ・色の流用元） ---------- */
+:root {
+  /* === ブランドカラー（葬儀社・不動産会社向けに上書き可） === */
+  --brand-bg:          #f7faf7;
+  --brand-main:        #6abf69;
+  --brand-main-dark:   #57a657;
+  --brand-sub:         #d7f5cb;
+  --brand-btn:         #4caf50;
+  --brand-btn-hover:   #388e3c;
+  --brand-accent:      #2e7d32;
+  --brand-footer-bg:   #6abf69;
+  --brand-footer-text: #ffffff;
+
+  /* === テキストカラー === */
+  --text-primary:   #333333;
+  --text-secondary: #555555;
+  --text-muted:     #777777;
+
+  /* === UIトークン === */
+  --white:          #ffffff;
+  --card-shadow:    0 4px 16px rgba(0, 0, 0, 0.09);
+  --card-shadow-hv: 0 8px 28px rgba(0, 0, 0, 0.14);
+  --radius-card:    16px;
+  --radius-btn:     50px;
+  --transition:     0.22s ease;
+
+  /* === タイポグラフィ（日本語対応） === */
+  --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+               "Yu Gothic", "Meiryo", sans-serif;
+  --font-size-base: 18px;   /* 高齢者向けに大きめ */
+  --line-height:    1.8;
+}
+
+/* ---------- 2. リセット・ベース ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--brand-bg);
+  color: var(--text-primary);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--brand-accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+/* フォーカスリング（アクセシビリティ） */
+:focus-visible {
+  outline: 3px solid var(--brand-main);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. レイアウト共通 ---------- */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- 4. ヘッダー ---------- */
+.site-header {
+  background: var(--white);
+  border-bottom: 3px solid var(--brand-main);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 20px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.site-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+}
+
+.site-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 5. ヒーロー ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--brand-sub) 0%, var(--brand-bg) 100%);
+  padding: 52px 0 44px;
+  text-align: center;
+  border-bottom: 1px solid #c5e8c0;
+}
+
+.hero-lead {
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: var(--brand-accent);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  background: var(--white);
+  color: var(--brand-accent);
+  border: 1.5px solid var(--brand-main);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 6. セクション共通 ---------- */
+.section-title {
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  margin-bottom: 8px;
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 3px;
+  background: var(--brand-main);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 36px;
+}
+
+/* ---------- 7. メインコンテンツ（サービスカード） ---------- */
+.main-content {
+  padding: 60px 0 64px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* カード */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 36px 24px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1.5px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hv);
+  border-color: var(--brand-sub);
+}
+
+.card-accent {
+  border-color: var(--brand-main);
+  background: linear-gradient(160deg, var(--white) 60%, var(--brand-sub));
+}
+
+.card-icon {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  flex-grow: 1;
+}
+
+.coming-soon-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ---------- 8. ボタン ---------- */
+.btn {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  text-align: center;
+  border: none;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--brand-btn);
+  color: var(--white);
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.35);
+  min-width: 130px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--brand-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(76, 175, 80, 0.45);
+  text-decoration: none;
+  color: var(--white);
+}
+
+.btn-accent {
+  background: var(--brand-accent);
+  color: var(--white);
+  box-shadow: 0 3px 10px rgba(46, 125, 50, 0.35);
+  min-width: 130px;
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(46, 125, 50, 0.45);
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* ---------- 9. 運営団体セクション ---------- */
+.about-section {
+  background: var(--white);
+  padding: 60px 0;
+  border-top: 1px solid #ddeedd;
+  border-bottom: 1px solid #ddeedd;
+}
+
+.about-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  background: var(--brand-bg);
+  border-radius: var(--radius-card);
+  padding: 36px 40px;
+  box-shadow: var(--card-shadow);
+  margin-top: 16px;
+}
+
+.about-logo-wrap {
+  flex-shrink: 0;
+}
+
+.about-logo-placeholder {
+  width: 140px;
+  height: 100px;
+  background: var(--brand-sub);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  line-height: 1.5;
+  border: 2px dashed var(--brand-main);
+}
+
+.about-org-name {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  margin-bottom: 10px;
+}
+
+.about-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+
+.about-contacts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about-contacts li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.contact-label {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.contact-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.text-link {
+  color: var(--brand-main-dark);
+  text-decoration: underline;
+}
+
+/* ---------- 10. LINEセクション ---------- */
+.line-section {
+  padding: 60px 0;
+  background: var(--brand-bg);
+}
+
+.line-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.line-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 28px 24px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px solid #e0f2e0;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.line-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hv);
+}
+
+.line-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.line-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.line-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  text-align: left;
+  line-height: 1.4;
+}
+
+.qr-wrap {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.qr-placeholder {
+  width: 140px;
+  height: 140px;
+  background: var(--brand-sub);
+  border-radius: 8px;
+  border: 2px dashed var(--brand-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--brand-accent);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.line-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---------- 11. 免責事項 ---------- */
+.disclaimer-section {
+  padding: 44px 0 52px;
+  background: #f0f6f0;
+  border-top: 1px solid #d0e8d0;
+}
+
+.btn-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 2px solid var(--brand-main);
+  border-radius: var(--radius-btn);
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand-accent);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font-family: var(--font-body);
+}
+
+.btn-disclaimer:hover,
+.btn-disclaimer:focus-visible {
+  background: var(--brand-main);
+  color: var(--white);
+}
+
+.disclaimer-arrow {
+  display: inline-block;
+  transition: transform var(--transition);
+  font-size: 0.85rem;
+}
+
+.disclaimer-arrow.open {
+  transform: rotate(180deg);
+}
+
+.disclaimer-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.3s ease;
+  opacity: 0;
+}
+
+.disclaimer-content.is-open {
+  max-height: 3000px;
+  opacity: 1;
+  margin-top: 24px;
+}
+
+.disclaimer-inner {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid #d5ebd5;
+  padding: 36px 40px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.disclaimer-inner h3 {
+  font-size: 1.05rem;
+  color: var(--brand-accent);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.disclaimer-inner h4 {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--brand-main);
+  padding-left: 10px;
+}
+
+.disclaimer-inner p {
+  margin-bottom: 10px;
+}
+
+.disclaimer-inner ol {
+  padding-left: 22px;
+}
+
+.disclaimer-inner ol li {
+  margin-bottom: 6px;
+}
+
+.disclaimer-appendix {
+  margin-top: 22px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: pre-line;
+}
+
+/* ---------- 12. フッター ---------- */
+.site-footer {
+  background: var(--brand-footer-bg);
+  color: var(--brand-footer-text);
+  padding: 22px 0;
+  text-align: center;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  opacity: 0.92;
+}
+
+/* ---------- 13. レスポンシブ ---------- */
+
+/* タブレット（768px以下） */
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* スマートフォン（600px以下） */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  .site-title {
+    font-size: 1.08rem;
+  }
+
+  .site-subtitle {
+    font-size: 0.72rem;
+  }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .hero {
+    padding: 36px 0 30px;
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+  }
+
+  .badge {
+    font-size: 0.76rem;
+    padding: 5px 14px;
+  }
+
+  .main-content {
+    padding: 44px 0 48px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .card {
+    padding: 28px 22px 22px;
+  }
+
+  .about-card {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .about-logo-placeholder {
+    width: 100%;
+    height: 72px;
+  }
+
+  .line-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+
+  .disclaimer-inner {
+    padding: 22px 18px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .about-contacts li {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact-label {
+    min-width: auto;
+  }
+}
+
+/* 超小型画面 */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 14px;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- 14. アクセシビリティ：モーション低減 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
